@@ -1,13 +1,23 @@
-{% extends "base/base.html" %}
+ï»¿{% extends "base/base.html" %}
 
 {% block content %}
+
 <section class="article-detail">
+
     <div class="container narrow">
-        <p class="eyebrow">Review Submission</p>
-        <h1>{{ article.title }}</h1>
+
+        <p class="eyebrow">
+            Review Submission
+        </p>
+
+        <h1>
+            {{ article.title }}
+        </h1>
 
         <p class="article-meta">
-            By {{ article.author.username }} · {{ article.created_at|date:"d M Y" }}
+            By {{ article.author.username|default:"External Source" }}
+            |
+            {{ article.published_at|date:"d M Y H:i" }}
         </p>
 
         <div class="article-content">
@@ -15,10 +25,21 @@
         </div>
 
         <form method="post" class="approval-box">
+
             {% csrf_token %}
-            <button type="submit" class="btn-primary">Approve and Publish</button>
-            <a href="{% url 'editor_dashboard' %}" class="btn-dark">Back to Dashboard</a>
+
+            <button type="submit" class="btn-primary">
+                Approve and Publish
+            </button>
+
+            <a href="{% url 'editor_dashboard' %}" class="btn-dark">
+                Back to Dashboard
+            </a>
+
         </form>
+
     </div>
+
 </section>
+
 {% endblock %}
