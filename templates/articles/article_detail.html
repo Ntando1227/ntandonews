@@ -1,24 +1,181 @@
 ﻿{% extends "base/base.html" %}
 
 {% block content %}
-<section class="article-detail">
-    <div class="container narrow">
-        <p class="eyebrow">{{ article.publisher|default:"Independent Journalist" }}</p>
-        <h1>{{ article.title }}</h1>
 
-        <p class="article-meta">
-            By {{ article.author.username }} · {{ article.created_at|date:"d M Y H:i" }}
-        </p>
+<div class="article-detail-container">
 
-        {% if article.featured_image %}
-            <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="article-image">
-        {% endif %}
+    <div class="article-header">
 
-        <div class="article-content">
-            {{ article.content|linebreaks }}
+        <span class="article-category">
+            {{ article.category|title }}
+        </span>
+
+        <h1 class="article-title">
+            {{ article.title }}
+        </h1>
+
+        <div class="article-meta">
+            <span>
+                Published {{ article.published_at|date:"d M Y" }}
+            </span>
+
+            {% if article.publisher %}
+            <span>
+                • {{ article.publisher.name }}
+            </span>
+            {% endif %}
+
+            {% if article.source_name %}
+            <span>
+                • Source: {{ article.source_name }}
+            </span>
+            {% endif %}
         </div>
+
     </div>
-</section>
+
+    {% if article.external_image_url %}
+    <img
+        src="{{ article.external_image_url }}"
+        alt="{{ article.title }}"
+        class="article-image"
+    >
+    {% endif %}
+
+    <div class="article-summary">
+        "{{ article.summary }}"
+    </div>
+
+    <div class="article-content">
+
+        {% for paragraph in article.content.splitlines %}
+
+            {% if paragraph.strip %}
+
+                <p>
+                    {{ paragraph }}
+                </p>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+    {% if article.external_url %}
+    <div class="external-link-box">
+
+        <a href="{{ article.external_url }}" target="_blank">
+            Read Full Original Article
+        </a>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<style>
+
+.article-detail-container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:18px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+
+.article-header{
+    margin-bottom:30px;
+}
+
+.article-category{
+    background:#007749;
+    color:white;
+    padding:8px 16px;
+    border-radius:40px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.article-title{
+    font-size:42px;
+    margin-top:20px;
+    margin-bottom:18px;
+    line-height:1.2;
+    color:#111;
+}
+
+.article-meta{
+    color:#666;
+    font-size:15px;
+}
+
+.article-image{
+    width:100%;
+    border-radius:16px;
+    margin-bottom:30px;
+}
+
+.article-summary{
+    font-size:24px;
+    line-height:1.6;
+    color:#222;
+    font-style:italic;
+    margin-bottom:40px;
+    border-left:5px solid #007749;
+    padding-left:25px;
+}
+
+.article-content p{
+    font-size:19px;
+    line-height:1.9;
+    color:#222;
+    margin-bottom:28px;
+}
+
+.external-link-box{
+    margin-top:40px;
+    text-align:center;
+}
+
+.external-link-box a{
+    display:inline-block;
+    padding:14px 28px;
+    background:#007749;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.external-link-box a:hover{
+    background:#005f3b;
+}
+
+@media(max-width:768px){
+
+    .article-detail-container{
+        padding:20px;
+    }
+
+    .article-title{
+        font-size:30px;
+    }
+
+    .article-summary{
+        font-size:20px;
+    }
+
+    .article-content p{
+        font-size:17px;
+    }
+
+}
+
+</style>
+
 {% endblock %}
-
-
