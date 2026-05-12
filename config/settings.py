@@ -119,3 +119,5 @@ NEWS_API_KEY = config(
     "NEWS_API_KEY",
     default=""
 )
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
