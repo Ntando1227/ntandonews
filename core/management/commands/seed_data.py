@@ -1,70 +1,142 @@
-﻿from django.core.management.base import BaseCommand
-from django.utils import timezone
+﻿from datetime import timedelta
+
 from django.contrib.auth.models import Group
+from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from accounts.models import CustomUser
-from publishers.models import Publisher
 from articles.models import Article
+from newsletters.models import Newsletter
+from publishers.models import Publisher
 
 
 class Command(BaseCommand):
-    help = "Seed Ntando News with users and articles"
+    help = "Seed Ntando News with users, publishers, newsletters, internal articles, and external-style articles."
 
     def handle(self, *args, **kwargs):
-
         journalist_group, _ = Group.objects.get_or_create(name="Journalist")
         editor_group, _ = Group.objects.get_or_create(name="Editor")
         reader_group, _ = Group.objects.get_or_create(name="Reader")
 
-        journalist, created = CustomUser.objects.get_or_create(
+        journalist, _ = CustomUser.objects.get_or_create(
             username="Ntando",
             defaults={
                 "email": "ntando@news.com",
                 "role": "journalist",
             },
         )
-
         journalist.set_password("Mtimkulu")
         journalist.role = "journalist"
         journalist.save()
         journalist.groups.add(journalist_group)
 
-        editor, created = CustomUser.objects.get_or_create(
+        editor, _ = CustomUser.objects.get_or_create(
             username="NtandoM",
             defaults={
                 "email": "editor@news.com",
                 "role": "editor",
             },
         )
-
         editor.set_password("Mtimkulu")
         editor.role = "editor"
         editor.save()
         editor.groups.add(editor_group)
 
-        reader, created = CustomUser.objects.get_or_create(
+        reader, _ = CustomUser.objects.get_or_create(
             username="Reader1",
             defaults={
                 "email": "reader@news.com",
                 "role": "reader",
             },
         )
-
         reader.set_password("reader123")
         reader.role = "reader"
         reader.save()
         reader.groups.add(reader_group)
 
-        publisher, _ = Publisher.objects.get_or_create(
+        newsroom, _ = Publisher.objects.get_or_create(
             name="Ntando Newsroom",
             defaults={
-                "description": "South African digital newsroom",
+                "description": "South African digital newsroom covering sports, politics, finance, current affairs, culture, and personality features.",
                 "website": "https://ntandonews.onrender.com",
             },
         )
 
-        articles = [
+        economic_desk, _ = Publisher.objects.get_or_create(
+            name="Ntando Economic Desk",
+            defaults={
+                "description": "Economic, labour market, business, and youth finance reporting.",
+                "website": "https://ntandonews.onrender.com",
+            },
+        )
+
+        sports_desk, _ = Publisher.objects.get_or_create(
+            name="Ntando Sports Desk",
+            defaults={
+                "description": "Football, PSL, Liverpool, Arsenal, and South African sports coverage.",
+                "website": "https://ntandonews.onrender.com",
+            },
+        )
+
+        current_affairs_desk, _ = Publisher.objects.get_or_create(
+            name="Ntando Current Affairs",
+            defaults={
+                "description": "Human-interest stories, internet culture, public issues, and current affairs.",
+                "website": "https://ntandonews.onrender.com",
+            },
+        )
+
+        lifestyle_desk, _ = Publisher.objects.get_or_create(
+            name="Ntando Lifestyle Desk",
+            defaults={
+                "description": "Music, relationships, personality, and lifestyle coverage.",
+                "website": "https://ntandonews.onrender.com",
+            },
+        )
+
+        cape_times, _ = Publisher.objects.get_or_create(
+            name="Cape Times",
+            defaults={
+                "description": "South African news publication used as an external source.",
+                "website": "https://capetimes.co.za",
+            },
+        )
+
+        the_south_african, _ = Publisher.objects.get_or_create(
+            name="The South African",
+            defaults={
+                "description": "South African digital news publication used as an external source.",
+                "website": "https://www.thesouthafrican.com",
+            },
+        )
+
+        for publisher in [
+            newsroom,
+            economic_desk,
+            sports_desk,
+            current_affairs_desk,
+            lifestyle_desk,
+        ]:
+            publisher.journalists.add(journalist)
+            publisher.editors.add(editor)
+
+        reader.subscribed_publishers.add(
+            newsroom,
+            economic_desk,
+            sports_desk,
+            current_affairs_desk,
+            lifestyle_desk,
+            cape_times,
+            the_south_african,
+        )
+        reader.subscribed_journalists.add(journalist)
+
+        now = timezone.now()
+
+        internal_articles = [
             {
+                "days_ago": 1,
+                "publisher": current_affairs_desk,
                 "title": "Ntando Mtimkulu Says Internet Debates Between Believers and Skeptics Have Gone Completely Off the Rails",
                 "category": "current_affairs",
                 "summary": "Ntando reportedly spent hours watching philosophical internet debates descend into chaos.",
@@ -92,9 +164,11 @@ Despite the absurdity, sources say Mtimkulu still enjoys observing the discussio
 He finds humanity fascinating, a friend said. Also slightly exhausting.
 
 The entrepreneur reportedly concluded the evening by announcing that the internet may have given society too much access to microphones and not enough access to humility.
-                """,
+""",
             },
             {
+                "days_ago": 2,
+                "publisher": current_affairs_desk,
                 "title": "Ntando Mtimkulu Reportedly Loses Patience During Flat Earth Debate",
                 "category": "current_affairs",
                 "summary": "Friends say Ntando struggled to remain calm during an unexpected flat earth debate.",
@@ -124,9 +198,11 @@ He kept saying, We have too much access to Wi-Fi now, one source joked.
 While flat earth communities continue existing online, Ntando reportedly remains firmly committed to what he calls very radical ideas, including science, geography, and basic common sense.
 
 Sources say he has since vowed to avoid future flat earth debates entirely unless professional astronomers are present.
-                """,
+""",
             },
             {
+                "days_ago": 3,
+                "publisher": economic_desk,
                 "title": "South Africa Unemployment Crisis Continues to Weigh Heavily on Young People",
                 "category": "politics",
                 "summary": "Youth unemployment remains one of South Africa's biggest social and economic challenges.",
@@ -154,9 +230,11 @@ He always says unemployment is not just a statistic, one associate explained. It
 Despite the grim outlook, Mtimkulu reportedly remains optimistic that entrepreneurship, digital innovation, and skills development could help create new opportunities for younger generations in the future.
 
 This generation is resilient, he said. People are starting businesses, freelancing, learning online, building brands, trying anything they can. That determination matters.
-                """,
+""",
             },
             {
+                "days_ago": 4,
+                "publisher": economic_desk,
                 "title": "Young People Are No Longer Waiting — Ntando Mtimkulu Speaks on the Rise of Youth Investing",
                 "category": "finance",
                 "summary": "Ntando Mtimkulu says young people are becoming increasingly focused on investing and long-term wealth creation.",
@@ -186,9 +264,11 @@ Despite the optimism, Ntando warned against what he described as performative we
 A lot of people are being sold fantasies, he cautioned. Real wealth usually takes time, discipline, patience, and consistency. Most successful people are not becoming rich overnight.
 
 Still, he remains optimistic about the future of financially conscious youth in South Africa.
-                """,
+""",
             },
             {
+                "days_ago": 5,
+                "publisher": economic_desk,
                 "title": "The Rise of Ntando Mtimkulu: The Next Big Force in the Commercial World",
                 "category": "finance",
                 "summary": "Ntando Mtimkulu is rapidly positioning himself as one of South Africa's most promising young minds in business.",
@@ -216,9 +296,11 @@ Friends and colleagues say he possesses an unusual combination of confidence, cr
 As South Africa continues searching for a new generation of commercially minded leaders capable of competing on a global scale, many believe Ntando Mtimkulu represents exactly that future: ambitious, educated, innovative, and unapologetically visionary.
 
 While his journey is still unfolding, one thing is becoming increasingly clear — the name Ntando Mtimkulu is one the commercial world may soon find impossible to ignore.
-                """,
+""",
             },
             {
+                "days_ago": 6,
+                "publisher": sports_desk,
                 "title": "Ntando Mtimkulu Left Devastated as Arsenal Close In on League Glory",
                 "category": "sports",
                 "summary": "Liverpool supporter Ntando Mtimkulu is reportedly struggling with Arsenal's title charge.",
@@ -246,9 +328,11 @@ Despite the football heartbreak, those who know Mtimkulu best say his passion fo
 Still, with Arsenal edging closer to glory, friends say the coming weeks could be emotionally challenging for him.
 
 He is trying to stay strong, one insider laughed. But if Arsenal actually win the league, nobody should expect him to answer football messages for at least a month.
-                """,
+""",
             },
             {
+                "days_ago": 7,
+                "publisher": current_affairs_desk,
                 "title": "Mystery Romance? Ntando Mtimkulu Reportedly in Long-Distance Relationship With Freckles",
                 "category": "current_affairs",
                 "summary": "Speculation continues around Ntando's reported long-distance relationship with a mystery woman known as Freckles.",
@@ -280,26 +364,174 @@ Still, long-distance relationships are never easy. Friends say balancing persona
 Yet despite this, those around the pair insist their connection appears stronger than ever.
 
 Whether the mystery surrounding Freckles will ever fully be revealed remains unknown. But one thing appears increasingly clear: behind the ambitious entrepreneur and rising commercial mind is a young man deeply invested in a relationship that many close to him believe is very real — and very serious.
-                """,
+""",
+            },
+            {
+                "days_ago": 8,
+                "publisher": current_affairs_desk,
+                "title": "Ntando Mtimkulu Says He Is Concerned But Calm Amid Growing Hantavirus Discussions",
+                "category": "politics",
+                "summary": "Ntando reportedly adopts a cautiously confident approach amid growing online discussions around Hantavirus.",
+                "content": """
+As conversations surrounding Hantavirus continue circulating online and across global health discussions, Ntando Mtimkulu has reportedly adopted what friends describe as a cautiously confident approach to the situation.
+
+Sources close to Mtimkulu say the rising commercial personality has spent recent weeks keeping informed about developments while also encouraging those around him not to panic unnecessarily.
+
+He is nervous, obviously, one friend said. But he also keeps telling people that fear without information helps nobody.
+
+Known for his analytical mindset and calm demeanor under pressure, Ntando has allegedly approached the topic with a balance of concern and practicality.
+
+Friends say he has become unusually interested in public health discussions, preventative measures, and global preparedness conversations.
+
+According to those close to him, Mtimkulu believes modern society often reacts emotionally before fully understanding situations — something he reportedly wants to avoid.
+
+He is trying not to become one of those people doom-scrolling at 2am, another insider joked.
+
+While there is no indication that Ntando himself has been directly affected, sources claim the discussions around Hantavirus have sparked broader reflections in him about health, productivity, and the unpredictability of life.
+
+Despite the uncertainty surrounding public conversations online, Ntando reportedly remains optimistic and focused on his long-term goals.
+""",
+            },
+            {
+                "days_ago": 9,
+                "publisher": newsroom,
+                "title": "Ntando Mtimkulu Allegedly Believes He Could Run a Fortune 500 Company Tomorrow",
+                "category": "finance",
+                "summary": "Friends joke that Ntando's confidence has reached dangerous levels after a Fortune 500 leadership claim.",
+                "content": """
+Friends of Ntando Mtimkulu have jokingly accused him of possessing dangerous levels of confidence after he reportedly claimed he could successfully run a Fortune 500 company if given the opportunity.
+
+The statement, allegedly made during a casual late-night discussion about business leadership, has since become legendary among his friend group.
+
+He genuinely started explaining restructuring strategies like the board had already hired him, one source laughed.
+
+Known for his passion for enterprise management and commercial strategy, Ntando reportedly spends hours studying business models, leadership systems, and global corporate structures.
+
+Friends say conversations with him can quickly transform from casual small talk into full-scale TED Talks about branding, innovation, and organizational culture.
+
+While some view the confidence as amusing, others insist there may actually be substance behind it.
+
+He talks big, one friend admitted, but the scary thing is that he has usually thought things through.
+""",
+            },
+            {
+                "days_ago": 10,
+                "publisher": lifestyle_desk,
+                "title": "The Spotify Sessions: Ntando Mtimkulu Music Taste Sparks Heated Debate",
+                "category": "current_affairs",
+                "summary": "Friends are divided over Ntando's unpredictable music rotation and emotionally confusing playlists.",
+                "content": """
+A fierce debate has reportedly broken out among friends of Ntando Mtimkulu after several people questioned his increasingly unpredictable music rotation.
+
+While Ntando is known for having a deep appreciation for music, insiders claim his playlists have recently become emotionally confusing.
+
+One minute it is deep lyrical rap, said one source. The next minute it is heartbreak music, then jazz, then aggressive gym music.
+
+Friends suspect the mysterious influence of Freckles may be partially responsible for the shift, though no confirmation has been made.
+
+Despite the criticism, Ntando reportedly defends his playlists passionately, arguing that music should reflect every version of who you are.
+
+Sources also claim he treats Spotify algorithms with almost scientific seriousness, frequently curating playlists for different moods, environments, and even weather conditions.
+""",
+            },
+            {
+                "days_ago": 11,
+                "publisher": current_affairs_desk,
+                "title": "Ntando Mtimkulu Reportedly Preparing for Unmatched Greatness Era",
+                "category": "current_affairs",
+                "summary": "Friends say Ntando has entered a new period of discipline, ambition, and personal reinvention.",
+                "content": """
+Close associates of Ntando Mtimkulu say he has recently entered what he privately refers to as his Unmatched Greatness Era.
+
+While the phrase has confused many around him, friends claim it refers to a new period of discipline, ambition, and personal reinvention.
+
+He talks like he is in a sports documentary now, one friend joked.
+
+Sources say the new phase allegedly includes stricter routines, clearer career goals, improved fitness habits, and a renewed focus on long-term success.
+
+Friends have also noticed an increase in motivational quotes, strategic planning discussions, and random speeches about legacy.
+
+He genuinely believes he is building toward something massive, another source explained.
+
+Whether exaggerated or not, those closest to Ntando admit one thing: his confidence is extremely difficult to ignore.
+""",
             },
         ]
 
-        for item in articles:
-            Article.objects.update_or_create(
+        seeded_articles = []
+
+        for item in internal_articles:
+            article, _ = Article.objects.update_or_create(
                 title=item["title"],
                 defaults={
                     "summary": item["summary"],
-                    "content": item["content"],
+                    "content": item["content"].strip(),
                     "category": item["category"],
-                    "article_type": "internal",
-                    "publisher": publisher,
+                    "article_type": Article.INTERNAL,
+                    "publisher": item["publisher"],
                     "author": journalist,
                     "approved": True,
-                    "published_at": timezone.now(),
+                    "source_name": "",
+                    "external_url": None,
+                    "external_image_url": "",
+                    "published_at": now - timedelta(days=item["days_ago"], hours=item["days_ago"]),
                 },
             )
+            seeded_articles.append(article)
+
+        external_articles = [
+            {
+                "days_ago": 1,
+                "publisher": cape_times,
+                "title": "LIVE | Cyril Ramaphosa Remains President After National Address",
+                "category": "politics",
+                "summary": "President Cyril Ramaphosa addressed the nation following political pressure and Constitutional Court developments.",
+                "content": "This is an aggregated summary. Continue reading the full article on Cape Times using the original source link.",
+                "source_name": "Cape Times",
+                "external_url": "https://capetimes.co.za/news/politics/2026-05-11-live-cyril-ramaphosa-addresses-the-nation/",
+            },
+            {
+                "days_ago": 2,
+                "publisher": the_south_african,
+                "title": "Kaizer Chiefs Bosses Face Decisions on Coaches",
+                "category": "sports",
+                "summary": "Kaizer Chiefs management are reportedly evaluating members of the technical team after securing continental qualification.",
+                "content": "This is an aggregated sports summary. Continue reading the full article on The South African using the original source link.",
+                "source_name": "The South African",
+                "external_url": "https://www.thesouthafrican.com/sport/soccer/psl-south-africa/kaizer-chiefs-bosses-face-decisions-on-coaches/",
+            },
+        ]
+
+        for item in external_articles:
+            article, _ = Article.objects.update_or_create(
+                external_url=item["external_url"],
+                defaults={
+                    "title": item["title"],
+                    "summary": item["summary"],
+                    "content": item["content"],
+                    "category": item["category"],
+                    "article_type": Article.AGGREGATED,
+                    "publisher": item["publisher"],
+                    "author": None,
+                    "approved": True,
+                    "source_name": item["source_name"],
+                    "external_image_url": "",
+                    "published_at": now - timedelta(days=item["days_ago"], hours=item["days_ago"]),
+                },
+            )
+            seeded_articles.append(article)
+
+        newsletter, _ = Newsletter.objects.get_or_create(
+            title="Ntando Weekly Briefing",
+            defaults={
+                "description": "A curated weekly briefing featuring the latest stories from Ntando News.",
+                "author": journalist,
+            },
+        )
+        newsletter.articles.set(seeded_articles[:8])
 
         self.stdout.write(self.style.SUCCESS("Sample data created successfully."))
+        self.stdout.write(f"Articles seeded: {len(seeded_articles)}")
         self.stdout.write("Journalist Login: Ntando / Mtimkulu")
         self.stdout.write("Editor Login: NtandoM / Mtimkulu")
         self.stdout.write("Reader Login: Reader1 / reader123")
