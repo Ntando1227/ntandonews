@@ -143,7 +143,7 @@ class Command(BaseCommand):
                 "content": """
 According to close friends of Ntando Mtimkulu, one of his favorite forms of online entertainment has become watching philosophical arguments spiral completely out of control on social media.
 
-The Rhodes University graduate reportedly spent several hours recently observing a heated debate between religious users, skeptics, amateur philosophers, and random podcast fans — a discussion that insiders say achieved absolutely nothing after nearly five hours.
+The Rhodes University graduate reportedly spent several hours recently observing a heated debate between religious users, skeptics, amateur philosophers, and random podcast fans  a discussion that insiders say achieved absolutely nothing after nearly five hours.
 
 One person was quoting philosophy, a witness explained. Another was posting science articles. Somebody else brought up ancient history for no reason. It was chaos.
 
@@ -173,7 +173,7 @@ The entrepreneur reportedly concluded the evening by announcing that the interne
                 "category": "current_affairs",
                 "summary": "Friends say Ntando struggled to remain calm during an unexpected flat earth debate.",
                 "content": """
-What began as a casual late-night conversation among friends quickly descended into chaos after the topic of flat earth theories was unexpectedly introduced — and according to witnesses, Ntando Mtimkulu was absolutely not prepared for it.
+What began as a casual late-night conversation among friends quickly descended into chaos after the topic of flat earth theories was unexpectedly introduced  and according to witnesses, Ntando Mtimkulu was absolutely not prepared for it.
 
 Sources claim the discussion started innocently before one participant allegedly suggested that the Earth might actually be flat. The statement reportedly caused immediate confusion in the room, with Ntando initially assuming it was a joke.
 
@@ -183,7 +183,7 @@ Friends say Mtimkulu, known for his calm and analytical personality, attempted t
 
 At one point Ntando just stared at the ceiling in silence, another source recalled. You could literally see him questioning humanity.
 
-According to those present, the Rhodes University graduate tried explaining basic scientific concepts, gravity, global travel routes, and satellite technology — only to reportedly receive even more bizarre counterarguments in return.
+According to those present, the Rhodes University graduate tried explaining basic scientific concepts, gravity, global travel routes, and satellite technology  only to reportedly receive even more bizarre counterarguments in return.
 
 He said, Brother, people have literally gone to space, one friend laughed. But somehow that still was not enough.
 
@@ -207,7 +207,7 @@ Sources say he has since vowed to avoid future flat earth debates entirely unles
                 "category": "politics",
                 "summary": "Youth unemployment remains one of South Africa's biggest social and economic challenges.",
                 "content": """
-South Africa's unemployment crisis remains one of the country's biggest social and economic challenges, with millions of citizens — particularly young people — continuing to struggle to find stable work opportunities.
+South Africa's unemployment crisis remains one of the country's biggest social and economic challenges, with millions of citizens  particularly young people  continuing to struggle to find stable work opportunities.
 
 According to the latest labour market figures released by Statistics South Africa, the country's official unemployment rate has once again increased, reaching 32.7% in the first quarter of 2026.
 
@@ -235,7 +235,7 @@ This generation is resilient, he said. People are starting businesses, freelanci
             {
                 "days_ago": 4,
                 "publisher": economic_desk,
-                "title": "Young People Are No Longer Waiting — Ntando Mtimkulu Speaks on the Rise of Youth Investing",
+                "title": "Young People Are No Longer Waiting  Ntando Mtimkulu Speaks on the Rise of Youth Investing",
                 "category": "finance",
                 "summary": "Ntando Mtimkulu says young people are becoming increasingly focused on investing and long-term wealth creation.",
                 "content": """
@@ -257,7 +257,7 @@ People are nervous about the future, Ntando explained. But instead of giving up,
 
 Interestingly, Mtimkulu says the modern definition of investing has also evolved. While traditional investing once focused almost exclusively on stocks and property, younger generations are now investing in skills, personal brands, digital businesses, and online platforms.
 
-Somebody learning coding, building a YouTube channel, freelancing online, or starting a small clothing brand — that is also investment, he said. The mindset has shifted from simply earning money to building assets.
+Somebody learning coding, building a YouTube channel, freelancing online, or starting a small clothing brand  that is also investment, he said. The mindset has shifted from simply earning money to building assets.
 
 Despite the optimism, Ntando warned against what he described as performative wealth culture online, where unrealistic lifestyles and quick-money promises create dangerous expectations for young people.
 
@@ -283,11 +283,11 @@ During his time at Rhodes, he developed a reputation for creativity, discipline,
 
 Not content with stopping there, Ntando continued sharpening his commercial expertise by pursuing a Postgraduate Diploma in Enterprise Management at Rhodes University.
 
-The qualification further strengthened his understanding of business strategy, innovation, entrepreneurship, and modern organizational leadership — all critical tools for navigating today's rapidly changing economic environment.
+The qualification further strengthened his understanding of business strategy, innovation, entrepreneurship, and modern organizational leadership  all critical tools for navigating today's rapidly changing economic environment.
 
 But what truly separates Ntando Mtimkulu from many of his peers is not only his academic background. It is his vision.
 
-Observers describe him as a commercial juggernaut in the making — someone capable of bridging business, technology, culture, and modern African enterprise into one powerful ecosystem.
+Observers describe him as a commercial juggernaut in the making  someone capable of bridging business, technology, culture, and modern African enterprise into one powerful ecosystem.
 
 Whether discussing digital innovation, entrepreneurship, branding, or business development, Mtimkulu consistently demonstrates the kind of forward-thinking mindset associated with future industry leaders.
 
@@ -295,7 +295,7 @@ Friends and colleagues say he possesses an unusual combination of confidence, cr
 
 As South Africa continues searching for a new generation of commercially minded leaders capable of competing on a global scale, many believe Ntando Mtimkulu represents exactly that future: ambitious, educated, innovative, and unapologetically visionary.
 
-While his journey is still unfolding, one thing is becoming increasingly clear — the name Ntando Mtimkulu is one the commercial world may soon find impossible to ignore.
+While his journey is still unfolding, one thing is becoming increasingly clear  the name Ntando Mtimkulu is one the commercial world may soon find impossible to ignore.
 """,
             },
             {
@@ -307,7 +307,7 @@ While his journey is still unfolding, one thing is becoming increasingly clear �
                 "content": """
 For many football supporters around the world, the closing weeks of the season bring excitement, hope, and celebration. But for Ntando Mtimkulu, this season has reportedly delivered nothing but frustration, disbelief, and emotional damage.
 
-The outspoken Liverpool supporter has allegedly struggled to come to terms with the possibility of Arsenal F.C. lifting the league title — a scenario he once confidently dismissed earlier in the campaign.
+The outspoken Liverpool supporter has allegedly struggled to come to terms with the possibility of Arsenal F.C. lifting the league title  a scenario he once confidently dismissed earlier in the campaign.
 
 According to friends close to Mtimkulu, the mere thought of Arsenal fans celebrating a title has become deeply upsetting to him, with some jokingly claiming he now avoids football debates entirely whenever Arsenal's form is mentioned.
 
@@ -321,7 +321,7 @@ While many Liverpool fans have urged patience during the new era, Ntando reporte
 
 He misses Klopp football, another source joked. Every conversation somehow ends with him saying, Klopp would never allow this.
 
-Observers say Ntando's frustrations are amplified by the confidence currently flowing through Arsenal supporters online — something he reportedly finds almost impossible to tolerate.
+Observers say Ntando's frustrations are amplified by the confidence currently flowing through Arsenal supporters online  something he reportedly finds almost impossible to tolerate.
 
 Despite the football heartbreak, those who know Mtimkulu best say his passion for the sport is exactly what makes him such a committed supporter.
 
@@ -337,7 +337,7 @@ He is trying to stay strong, one insider laughed. But if Arsenal actually win th
                 "category": "current_affairs",
                 "summary": "Speculation continues around Ntando's reported long-distance relationship with a mystery woman known as Freckles.",
                 "content": """
-Social circles close to Ntando Mtimkulu have recently been buzzing with speculation surrounding what many are calling his most mysterious chapter yet — a long-distance relationship with a woman known only by the nickname Freckles.
+Social circles close to Ntando Mtimkulu have recently been buzzing with speculation surrounding what many are calling his most mysterious chapter yet  a long-distance relationship with a woman known only by the nickname Freckles.
 
 While neither Ntando nor the mystery woman has publicly confirmed the relationship, insiders claim the connection between the two has quietly become one of the most talked-about topics among friends and followers alike.
 
@@ -357,13 +357,13 @@ Known publicly for his ambitious and commercially driven mindset, friends say he
 
 There is business Ntando, one friend joked, and then there is Freckles Ntando.
 
-Sources also claim the pair have developed rituals to maintain the relationship despite the distance — including scheduled movie nights, late-night calls, shared playlists, and constant communication throughout the day.
+Sources also claim the pair have developed rituals to maintain the relationship despite the distance  including scheduled movie nights, late-night calls, shared playlists, and constant communication throughout the day.
 
 Still, long-distance relationships are never easy. Friends say balancing personal ambitions, demanding schedules, and emotional connection across different locations has not come without challenges.
 
 Yet despite this, those around the pair insist their connection appears stronger than ever.
 
-Whether the mystery surrounding Freckles will ever fully be revealed remains unknown. But one thing appears increasingly clear: behind the ambitious entrepreneur and rising commercial mind is a young man deeply invested in a relationship that many close to him believe is very real — and very serious.
+Whether the mystery surrounding Freckles will ever fully be revealed remains unknown. But one thing appears increasingly clear: behind the ambitious entrepreneur and rising commercial mind is a young man deeply invested in a relationship that many close to him believe is very real  and very serious.
 """,
             },
             {
@@ -383,7 +383,7 @@ Known for his analytical mindset and calm demeanor under pressure, Ntando has al
 
 Friends say he has become unusually interested in public health discussions, preventative measures, and global preparedness conversations.
 
-According to those close to him, Mtimkulu believes modern society often reacts emotionally before fully understanding situations — something he reportedly wants to avoid.
+According to those close to him, Mtimkulu believes modern society often reacts emotionally before fully understanding situations  something he reportedly wants to avoid.
 
 He is trying not to become one of those people doom-scrolling at 2am, another insider joked.
 
