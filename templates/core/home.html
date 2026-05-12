@@ -1,0 +1,112 @@
+﻿{% extends "base/base.html" %}
+
+{% block content %}
+
+<section class="sa-hero">
+    <div class="container sa-hero-grid">
+        <div>
+            <p class="eyebrow">South African Digital Newsroom</p>
+            <h1>Sports, politics, and finance from Mzansi.</h1>
+            <p class="hero-text">
+                Ntando's News brings together independent journalists, publishers, editors, and readers across South Africa.
+            </p>
+
+            <div class="hero-actions">
+                <a href="{% url 'article_list' %}" class="btn-primary">Read Latest News</a>
+                <a href="{% url 'newsletter_list' %}" class="btn-secondary">View Newsletters</a>
+            </div>
+        </div>
+
+        <div class="sa-hero-panel">
+            <p class="panel-label">Today's Focus</p>
+            <h2>Sports. Politics. Finance.</h2>
+            <p>
+                A modern platform built for trusted South African reporting and independent voices.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="ticker">
+    <div class="container ticker-inner">
+        <strong>Trending:</strong>
+        <span>Sports</span>
+        <span>Politics</span>
+        <span>Finance</span>
+        <span>Local Business</span>
+        <span>Mzansi Football</span>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-heading">
+        <p class="eyebrow">Editor's Pick</p>
+        <h2>Featured Stories</h2>
+
+        <div class="card-grid">
+            {% for article in featured_articles %}
+                <article class="news-card large-news-card">
+                    <p class="tag">{{ article.get_category_display }} - {{ article.publisher|default:"Independent" }}</p>
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.summary|default:article.content|truncatewords:28 }}</p>
+                    <a href="{{ article.get_absolute_url }}">Read full story</a>
+                </article>
+            {% empty %}
+                <p>No approved articles yet. Add articles in the admin panel and approve them.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section sa-categories">
+    <div class="container">
+        <p class="eyebrow">Coverage Areas</p>
+        <h2>Built for South African stories</h2>
+
+        <div class="category-grid">
+            <a class="category-card" href="{% url 'articles_by_category' 'sports' %}">Sports</a>
+            <a class="category-card" href="{% url 'articles_by_category' 'politics' %}">Politics</a>
+            <a class="category-card" href="{% url 'articles_by_category' 'finance' %}">Finance</a>
+            <div class="category-card">Football</div>
+            <div class="category-card">Public Policy</div>
+            <div class="category-card">Small Business</div>
+        </div>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="container">
+        <p class="eyebrow">Fresh Updates</p>
+        <h2>Latest Articles</h2>
+
+        <div class="card-grid">
+            {% for article in latest_articles %}
+                <article class="news-card">
+                    <p class="tag">{{ article.get_category_display }} - {{ article.publisher|default:"Independent" }}</p>
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.summary|default:article.content|truncatewords:20 }}</p>
+                    <a href="{{ article.get_absolute_url }}">Open article</a>
+                </article>
+            {% empty %}
+                <p>Latest approved articles will appear here.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="newsletter-strip">
+    <div class="container newsletter-grid">
+        <div>
+            <p class="eyebrow">Stay informed</p>
+            <h2>Subscribe to voices you trust.</h2>
+            <p>
+                Readers can follow publishers and independent journalists to receive curated updates.
+            </p>
+        </div>
+
+        <a href="{% url 'register' %}" class="btn-primary">Join Ntando's News</a>
+    </div>
+</section>
+
+{% endblock %}
+

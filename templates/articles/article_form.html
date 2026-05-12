@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-card wide-card">
+        <h1>Create Article</h1>
+        <p>Submit a new article for editor approval.</p>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn-primary full-width">Submit Article</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

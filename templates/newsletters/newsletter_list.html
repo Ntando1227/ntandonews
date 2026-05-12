@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">Curated Briefings</p>
+        <h1>Newsletters</h1>
+        <p>Weekly and special-edition briefings from trusted South African voices.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="card-grid">
+            {% for newsletter in newsletters %}
+                <article class="news-card">
+                    <p class="tag">Newsletter</p>
+                    <h3>{{ newsletter.title }}</h3>
+                    <p>{{ newsletter.description|default:"No description available yet." }}</p>
+                    <p class="article-meta">Curated by {{ newsletter.author.username }}</p>
+                </article>
+            {% empty %}
+                <p>No newsletters have been created yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

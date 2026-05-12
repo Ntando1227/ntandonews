@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-card">
+        <h1>Login</h1>
+        <p>Access your Ntando's News account.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn-primary full-width">Login</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

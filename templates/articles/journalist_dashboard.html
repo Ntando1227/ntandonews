@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">Journalist Workspace</p>
+        <h1>Your Articles</h1>
+        <p>Create, track, and manage your submitted work.</p>
+
+        <div class="hero-actions">
+            <a href="{% url 'article_create' %}" class="btn-primary">Create Article</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Publisher</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.publisher|default:"Independent" }}</td>
+                            <td>
+                                {% if article.approved %}
+                                    <span class="status approved">Approved</span>
+                                {% else %}
+                                    <span class="status pending">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ article.created_at|date:"d M Y" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">You have not created any articles yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

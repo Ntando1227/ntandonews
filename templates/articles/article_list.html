@@ -1,0 +1,64 @@
+﻿{% extends "base/base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">Mzansi Newsroom</p>
+        <h1>Latest Stories</h1>
+        <p>Approved internal and aggregated sports, politics, finance, and current affairs stories.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <form method="get" class="search-bar">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search stories, sources, topics...">
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="section-tabs">
+            <a href="{% url 'article_list' %}">All</a>
+            <a href="{% url 'articles_by_category' 'sports' %}">Sports</a>
+            <a href="{% url 'articles_by_category' 'politics' %}">Politics</a>
+            <a href="{% url 'articles_by_category' 'finance' %}">Finance</a>
+            <a href="{% url 'articles_by_category' 'current_affairs' %}">Current Affairs</a>
+        </div>
+
+        <div class="card-grid">
+            {% for article in articles %}
+                <article class="news-card">
+                    {% if article.external_image_url %}
+                        <img src="{{ article.external_image_url }}" alt="{{ article.title }}" class="card-image">
+                    {% endif %}
+
+                    <p class="tag">
+                        {{ article.get_category_display }} -
+                        {% if article.is_external %}
+                            {{ article.source_name|default:"External Source" }}
+                        {% else %}
+                            Internal Story
+                        {% endif %}
+                    </p>
+
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.summary|default:article.content|truncatewords:30 }}</p>
+
+                    <p class="article-meta">
+                        {% if article.is_external %}
+                            Aggregated story
+                        {% else %}
+                            By {{ article.author.username }}
+                        {% endif %}
+                        - Published {{ article.published_at|date:"d M Y H:i" }}
+                    </p>
+
+                    <a href="{{ article.get_absolute_url }}">Read story</a>
+                </article>
+            {% empty %}
+                <p>No approved articles available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

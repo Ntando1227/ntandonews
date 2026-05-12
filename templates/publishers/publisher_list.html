@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">Publications</p>
+        <h1>South African Publishers</h1>
+        <p>Curated local publications and newsroom partners on Ntando's News.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="card-grid">
+            {% for publisher in publishers %}
+                <article class="news-card">
+                    <p class="tag">Publisher</p>
+                    <h3>{{ publisher.name }}</h3>
+                    <p>{{ publisher.description|default:"This publisher has not added a description yet." }}</p>
+
+                    {% if publisher.website %}
+                        <a href="{{ publisher.website }}" target="_blank">Visit publisher ?</a>
+                    {% endif %}
+                </article>
+            {% empty %}
+                <p>No publishers have been added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
